@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import Experience from "../Experience";
+import ChristmasModel from "./ChristmasModel";
 import Environment from "./Environment";
 
 export default class World {
@@ -15,10 +16,11 @@ export default class World {
       new THREE.MeshStandardMaterial({})
     );
 
-    this.scene.add(testMesh);
+    // this.scene.add(testMesh);
 
     // wait for resources
     this.resources.on("ready", () => {
+      this.christmasModel = new ChristmasModel();
       this.environment = new Environment();
     });
   }

@@ -11,4 +11,9 @@ export default [
       "textures/environmentMap/nz.png",
     ],
   },
+  {
+    name: "christmasModel",
+    type: "gltfModel",
+    path: "models/christmas.gltf",
+  },
 ];
