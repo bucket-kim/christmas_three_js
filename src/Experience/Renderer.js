@@ -20,10 +20,10 @@ export default class Renderer {
 
     this.instance.physicallyCorrectLights = true;
     this.instance.outputEncoding = THREE.sRGBEncoding;
-    this.instance.toneMapping = THREE.CineonToneMapping;
-    this.instance.toneMappingExposure = 1.5;
+    this.instance.toneMapping = THREE.PCFSoftShadowMap;
+    this.instance.toneMappingExposure = 1;
     this.instance.shadowMap.enabled = true;
-    this.instance.shadowMap.type = THREE.PCFShadowMap;
+    this.instance.shadowMap.type = THREE.ACESFilmicToneMapping;
     this.instance.setSize(this.sizes.width, this.sizes.height);
     this.instance.setPixelRatio(Math.min(this.sizes.pixelRatio, 2));
   }

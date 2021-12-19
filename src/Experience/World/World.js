@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import Experience from "../Experience";
 import ChristmasModel from "./ChristmasModel";
+import Floor from "./Floor.js";
 import Environment from "./Environment";
 
 export default class World {
@@ -20,6 +21,7 @@ export default class World {
 
     // wait for resources
     this.resources.on("ready", () => {
+      this.floorModel = new Floor();
       this.christmasModel = new ChristmasModel();
       this.environment = new Environment();
     });
