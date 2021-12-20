@@ -40,27 +40,30 @@ export default class Environment {
   }
 
   setAreaLight() {
-    this.areaLight = new THREE.RectAreaLight("#ffffff", 4, 10, 10);
-    this.areaLight.rotation.z = Math.PI * -0.5;
-    this.areaLight.position.set(0, 0, 15);
+    this.areaLight = new THREE.RectAreaLight("#ffffff", 4, 15, 15);
+    this.areaLight.rotation.z = Math.PI * 0.5;
+    // this.areaLight.rotation.x = -0.5;
+    this.areaLight.rotation.y = -0.2;
+    this.areaLight.position.set(0, 7, 15);
+
     // this.scene.add(this.areaLight);
 
     this.directionalLight = new THREE.DirectionalLight("#ffffff", 1.5);
-    this.directionalLight.position.set(0, 10, 10);
+    this.directionalLight.position.set(10, 10, 10);
     this.directionalLight.castShadow = true;
     this.directionalLight.shadow.radius = 20;
     this.directionalLight.shadow.mapSize.set(1024, 1024);
-    this.scene.add(this.directionalLight);
+    // this.scene.add(this.directionalLight);
 
     this.pointLight = new THREE.PointLight("#ffffff", 10);
-    this.pointLight.position.set(0, 2, 1);
+    this.pointLight.position.set(1.5, 2, 1);
     // this.pointLight.castShadow = true;
     // this.pointLight.shadow.radius = 20;
     this.pointLight.shadow.mapSize.set(1024, 1024);
 
     this.lightHelper = new THREE.PointLightHelper(this.pointLight, 1);
 
-    this.scene.add(this.lightHelper);
+    // this.scene.add(this.lightHelper);
     this.scene.add(this.pointLight);
   }
 }

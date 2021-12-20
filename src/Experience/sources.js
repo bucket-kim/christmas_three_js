@@ -31,7 +31,7 @@ export default [
   {
     name: "christmasTexture",
     type: "texture",
-    path: "textures/christmasTexture/christmasTexture.png",
+    path: "textures/christmasTexture/colorMap.png",
   },
   {
     name: "christmasRoughnessTexture",
