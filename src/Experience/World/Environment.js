@@ -9,19 +9,19 @@ export default class Environment {
     this.resources = this.experience.resources;
 
     // light setup
-    this.setEnvironmentLight();
+    // this.setEnvironmentLight();
     this.setAreaLight();
   }
 
   setEnvironmentLight() {
     this.environmentMap = {};
-    this.environmentMap.intensity = 2.0;
+    this.environmentMap.intensity = 1.0;
     this.environmentMap.texture = this.resources.items.environmentMapTexture;
     this.environmentMap.texture.encoding = THREE.sRGBEncoding;
     this.environmentMap.castShadow = true;
 
     this.scene.environment = this.environmentMap.texture;
-    // this.scene.background = this.environmentMap.texture;
+    this.scene.background = this.environmentMap.texture;
 
     this.environmentMap.updateMaterials = () => {
       this.scene.traverse((child) => {
@@ -40,24 +40,27 @@ export default class Environment {
   }
 
   setAreaLight() {
-    this.areaLight = new THREE.RectAreaLight("#ffffff", 10, 20, 10);
-    this.areaLight.rotation.y = -Math.PI * 0.5;
-    this.areaLight.position.set(-12, 5, 0);
-    this.scene.add(this.areaLight);
+    this.areaLight = new THREE.RectAreaLight("#ffffff", 4, 10, 10);
+    this.areaLight.rotation.z = Math.PI * -0.5;
+    this.areaLight.position.set(0, 0, 15);
+    // this.scene.add(this.areaLight);
 
-    this.directionalLight = new THREE.DirectionalLight("#ffffff", 1);
-    this.directionalLight.position.set(0, 3, 4);
+    this.directionalLight = new THREE.DirectionalLight("#ffffff", 1.5);
+    this.directionalLight.position.set(0, 10, 10);
     this.directionalLight.castShadow = true;
-    this.directionalLight.shadow.radius = 5;
+    this.directionalLight.shadow.radius = 20;
     this.directionalLight.shadow.mapSize.set(1024, 1024);
-    // this.scene.add(this.directionalLight);
+    this.scene.add(this.directionalLight);
 
     this.pointLight = new THREE.PointLight("#ffffff", 10);
-    this.pointLight.position.set(-1, 2, 0);
-    this.pointLight.castShadow = true;
-    this.pointLight.shadow.radius = 5;
+    this.pointLight.position.set(0, 2, 1);
+    // this.pointLight.castShadow = true;
+    // this.pointLight.shadow.radius = 20;
     this.pointLight.shadow.mapSize.set(1024, 1024);
 
-    // this.scene.add(this.pointLight);
+    this.lightHelper = new THREE.PointLightHelper(this.pointLight, 1);
+
+    this.scene.add(this.lightHelper);
+    this.scene.add(this.pointLight);
   }
 }

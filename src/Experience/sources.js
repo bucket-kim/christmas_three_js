@@ -11,6 +11,11 @@ export default [
       "textures/environmentMap/nz.png",
     ],
   },
+  // {
+  //   name: "environmentMapTexture",
+  //   type: "cubeTexture",
+  //   path: "textures/environmentMap/studio_country_hall_1k.hdr",
+  // },
   // model import
   {
     name: "christmasModel",
@@ -26,7 +31,7 @@ export default [
   {
     name: "christmasTexture",
     type: "texture",
-    path: "textures/christmasTexture/colorMap.png",
+    path: "textures/christmasTexture/christmasTexture.png",
   },
   {
     name: "christmasRoughnessTexture",
@@ -41,7 +46,7 @@ export default [
   {
     name: "floorTexture",
     type: "texture",
-    path: "textures/floorTexture/colorMap.png",
+    path: "textures/floorTexture/colorMap2.png",
   },
   {
     name: "floorRoughness",

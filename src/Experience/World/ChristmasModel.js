@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import Experience from "../Experience";
-import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader.js";
+import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader";
 import { RoughnessMipmapper } from "three/examples/jsm/utils/RoughnessMipmapper.js";
 
 export default class ChristmasModel {
@@ -20,29 +20,50 @@ export default class ChristmasModel {
   }
 
   setModel() {
-    this.model = {};
-    this.model.mesh = this.resources.items.christmasModel.scene;
-    this.model.mesh.position.set(0, -1, 0);
-    this.model.texture = this.map;
-    this.model.texture.encoding = THREE.sRGBEncoding;
-    this.model.texture.flipY = false;
+    new RGBELoader().load(
+      "textures/environmentMap/studio_country_hall_1k.hdr",
+      (texture) => {
+        texture.mapping = THREE.EquirectangularReflectionMapping;
+        // this.scene.background = texture;
+        this.scene.environment = texture;
 
-    this.model.roughness = this.roughness;
-    this.model.roughness.flipY = false;
+        const roughnessMipmapper = new RoughnessMipmapper(
+          new THREE.WebGLRenderer({
+            canvas: this.canvas,
+            antialias: true,
+          })
+        );
 
-    this.model.metalness = this.metalness;
-    this.model.metalness.flipY = false;
+        this.model = {};
+        this.model.mesh = this.resources.items.christmasModel.scene;
+        this.model.mesh.position.set(0, -1.5, 0);
+        this.model.mesh.rotation.y = Math.PI * 0.5;
+        this.model.texture = this.map;
+        this.model.texture.encoding = THREE.sRGBEncoding;
+        this.model.texture.flipY = false;
 
-    this.model.material = new THREE.MeshStandardMaterial({
-      map: this.model.texture,
-      roughnessMap: this.model.roughness,
-      metalnessMap: this.model.metalness,
-    });
-    this.model.mesh.traverse((child) => {
-      if (child instanceof THREE.Mesh) {
-        child.material = this.model.material;
+        this.model.roughness = this.roughness;
+        this.model.roughness.flipY = false;
+
+        this.model.metalness = this.metalness;
+        this.model.metalness.flipY = false;
+
+        this.model.material = new THREE.MeshStandardMaterial({
+          map: this.model.texture,
+          roughnessMap: this.model.roughness,
+          metalnessMap: this.model.metalness,
+        });
+        this.model.mesh.traverse((child) => {
+          if (child instanceof THREE.Mesh) {
+            child.material = this.model.material;
+            child.castShadow = true;
+            child.receiveShadow = true;
+            roughnessMipmapper.generateMipmaps(child.material);
+          }
+        });
+        this.scene.add(this.model.mesh);
+        roughnessMipmapper.dispose();
       }
-    });
-    this.scene.add(this.model.mesh);
+    );
   }
 }
