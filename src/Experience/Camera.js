@@ -10,6 +10,8 @@ export default class Camera {
     this.scene = this.experience.scene;
     this.canvas = this.experience.canvas;
 
+    this.mode = "default";
+
     this.setInstance();
     this.setControls();
   }
@@ -22,12 +24,24 @@ export default class Camera {
       1000
     );
     this.instance.position.set(6, 1, 0);
+    this.instance.rotation.reorder("YXZ");
+
     this.scene.add(this.instance);
   }
 
   setControls() {
     this.controls = new OrbitControls(this.instance, this.canvas);
     this.controls.enableDamping = true;
+    this.controls.minPolarAngle = Math.PI * 0.25;
+    this.controls.maxPolarAngle = Math.PI * 0.5;
+    this.controls.minAzimuthAngle = Math.PI * 0.45;
+    this.controls.maxAzimuthAngle = Math.PI * 0.55;
+    this.controls.enableZoom = true;
+    this.controls.screenSpacePanning = true;
+    this.controls.enableKeys = false;
+    this.controls.minDistance = 5;
+    this.controls.maxDistance = 10;
+    this.controls.zoomSpeed = 0.25;
   }
 
   resize() {

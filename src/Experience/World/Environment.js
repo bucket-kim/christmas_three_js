@@ -20,8 +20,8 @@ export default class Environment {
     this.environmentMap.texture.encoding = THREE.sRGBEncoding;
     this.environmentMap.castShadow = true;
 
-    this.scene.environment = this.environmentMap.texture;
-    this.scene.background = this.environmentMap.texture;
+    // this.scene.environment = this.environmentMap.texture;
+    // this.scene.background = this.environmentMap.texture;
 
     this.environmentMap.updateMaterials = () => {
       this.scene.traverse((child) => {
@@ -55,8 +55,8 @@ export default class Environment {
     this.directionalLight.shadow.mapSize.set(1024, 1024);
     // this.scene.add(this.directionalLight);
 
-    this.pointLight = new THREE.PointLight("#ffffff", 10);
-    this.pointLight.position.set(1.5, 2, 1);
+    this.pointLight = new THREE.PointLight("#ffd28e", 17);
+    this.pointLight.position.set(1, 1, 2);
     // this.pointLight.castShadow = true;
     // this.pointLight.shadow.radius = 20;
     this.pointLight.shadow.mapSize.set(1024, 1024);

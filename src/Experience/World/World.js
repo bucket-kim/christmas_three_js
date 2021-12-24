@@ -2,7 +2,8 @@ import * as THREE from "three";
 import Experience from "../Experience";
 import ChristmasModel from "./ChristmasModel";
 import Floor from "./Floor.js";
-import Environment from "./Environment";
+import Environment from "./Environment.js";
+import CandleLight from "../CandleLight";
 
 export default class World {
   constructor() {
@@ -24,6 +25,13 @@ export default class World {
       this.floorModel = new Floor();
       this.christmasModel = new ChristmasModel();
       this.environment = new Environment();
+      this.candleLight = new CandleLight();
     });
+  }
+
+  update() {
+    if (this.candleLight) {
+      this.candleLight.update();
+    }
   }
 }

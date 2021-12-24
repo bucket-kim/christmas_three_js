@@ -22,42 +22,36 @@ export default class ChristmasModel {
       "textures/environmentMap/studio_country_hall_1k.hdr",
       (texture) => {
         texture.mapping = THREE.EquirectangularReflectionMapping;
-
         // this.scene.background = texture;
         this.scene.environment = texture;
-
         const roughnessMipmapper = new RoughnessMipmapper(
           new THREE.WebGLRenderer({
             canvas: this.canvas,
             antialias: true,
           })
         );
-
         this.model = {};
         this.model.mesh = this.resources.items.floorModel.scene;
         this.model.mesh.position.set(0, -1.5, 0);
         this.model.mesh.rotation.y = Math.PI * 0.5;
         this.model.mesh.scale.set(1, 1, 1);
-
         this.model.texture = this.map;
         this.model.texture.encoding = THREE.sRGBEncoding;
         this.model.texture.flipY = false;
         this.roughness.flipY = false;
-
         this.model.material = new THREE.MeshStandardMaterial({
           map: this.model.texture,
           roughnessMap: this.roughness,
+          side: THREE.DoubleSide,
         });
-
         this.model.mesh.traverse((child) => {
           if (child instanceof THREE.Mesh) {
             child.material = this.model.material;
-            child.castShadow = true;
+            // child.castShadow = true;
             child.receiveShadow = true;
             roughnessMipmapper.generateMipmaps(child.material);
           }
         });
-
         this.scene.add(this.model.mesh);
       }
     );

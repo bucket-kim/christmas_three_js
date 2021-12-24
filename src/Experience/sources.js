@@ -20,12 +20,17 @@ export default [
   {
     name: "christmasModel",
     type: "gltfModel",
-    path: "models/christmas.gltf",
+    path: "models/christmasModel.gltf",
   },
   {
     name: "floorModel",
     type: "gltfModel",
     path: "models/floor.gltf",
+  },
+  {
+    name: "candleModel",
+    type: "gltfModel",
+    path: "models/candleLight.gltf",
   },
   // texture import
   {
