@@ -18,7 +18,12 @@ export default class Audio {
     this.sound = new THREE.Audio(this.listener);
     this.audioLoader = new THREE.AudioLoader();
 
-    this.audioLoader.load("audio/The-Christmas-Song.ogg", (buffer) => {
+    window.onload = () => {
+      let context = new AudioContext();
+      context.resume();
+    };
+
+    this.audioLoader.load("audio/ikson-christmas.ogg", (buffer) => {
       this.sound.setBuffer(buffer);
       this.sound.setLoop(true);
       this.sound.setVolume(1);

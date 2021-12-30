@@ -7,6 +7,7 @@ import World from "./World/World.js";
 import Resources from "./Utils/Resources.js";
 import sources from "./sources.js";
 import Audio from "./Audio.js";
+import Loading from "./Loading.js";
 
 let instance = null;
 
@@ -31,6 +32,7 @@ export default class Experience {
     this.renderer = new Renderer();
     this.world = new World();
     this.audio = new Audio();
+    // this.loading = new Loading();
 
     this.sizes.on("resize", () => {
       this.resize();
